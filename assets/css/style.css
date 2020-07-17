@@ -1,0 +1,25 @@
+/* Style Sheet */
+
+#body {
+    height: 100vh;
+}
+
+.border-less {
+    border-radius: 0px !important;
+}
+
+.min-height {
+    min-height: 150px;
+    max-height: 250px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+.bg-blue {
+    background-color: #3429d6;
+    color: #fff;
+}
+
+.color-white {
+    color: #fff !important;
+}
