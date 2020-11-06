@@ -29,6 +29,7 @@
             <meta property="og:description" content="<?= empty($og_data['description']) ? $metadata['description'] : $og_data['description'] ?>" />
     <?php }
     endif; ?>
+
     <!-- Theme Color -->
     <meta name="theme-color" content="#000" />
     <meta name="msapplication-navbutton-color" content="#000">
@@ -36,6 +37,7 @@
 
     <!-- SEO Optimization -->
     <meta name="robots" content="index, follow" />
+    <!-- CSRF Parameters -->
     <meta name="csrf-param" content="authenticity_token" />
 
     <title><?= $title ?></title>

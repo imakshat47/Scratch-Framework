@@ -20,7 +20,7 @@ class BaseController extends Controller
         // SET METADATA
         $data['metadata'] = [
             'name' => 'Scratch PHP',
-            'description' => 'A flexible and highly scalable php Framework, Scratch. Build beautiful websites and powerful Apps',
+            'description' => 'A flexible and highly scalable php Framework, Scratch. Build beautiful websites and powerful Applications!!',
             'keywords' => 'Scratch, PHP Framework, Website Prameworks'
         ];
 
@@ -28,7 +28,7 @@ class BaseController extends Controller
         $data['og_data'] = [
             'url' => 'http://www.scratch.com/',
             'site_name' => 'SCRATCH',
-            'description' => 'A flexible and highly scalable php Framework, Scratch. Build beautiful websites and powerful Apps'
+            'description' => 'A flexible and highly scalable php Framework, Scratch. Build beautiful websites and powerful Applications!!'
         ];
 
         /* IF NOT TITLE SET BY DEFAULT */
