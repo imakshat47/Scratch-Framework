@@ -3,21 +3,13 @@ class Home extends BaseController
 {
     function index()
     {
-        $data['title'] = "Welcome to Scratch | Home";
+        echo $data['title'] = "Welcome to Scratch | Home";
+        $this->view('home', $data);
 
-        $this->bm->add_user();
+        /* -or- */
 
-        $this->load->view('partials/header', $data);
-        $this->load->view('home');
-        $this->load->view('partials/footer');
-    }
-
-    function users()
-    {
-        $data['title'] = "Users";
-
-        $this->load->view('partials/header', $data);
-        $this->load->view('home');
-        $this->load->view('partials/footer');
+        // $this->load->view('partials/header', $data);
+        // $this->load->view('home');
+        // $this->load->view('partials/footer');
     }
 }

@@ -1,5 +1,5 @@
 <?php
-class DB
+class Database
 {
 
     /*    
@@ -56,7 +56,7 @@ class DB
             return true;
         } catch (PDOException $e) {
             echo 'Error' . $e->getMessage();
-        }
+        }        
     }
 
     /*
@@ -131,11 +131,34 @@ class DB
                 $this->__prepared->execute($this->__where_condition);
             else $this->__prepared->execute();
         } catch (PDOException $e) {
-            echo "Error Message: $e";
-            exit(5);
+            // echo "Error Message: $e";            
+            return false;
         }
         return $this;
     }
+
+    /*
+    *
+    *   TO RETURN RESULT IN ARRAY
+    *   @return QUERY ALL RESULTS IN OBJECT ARRAY
+    *
+    */
+    public function first_row()
+    {
+        return $this->__prepared->fetch(PDO::FETCH_OBJ);
+    }
+
+    /*
+    *
+    *   TO RETURN RESULT IN ARRAY
+    *   @return QUERY ALL RESULTS IN OBJECT ARRAY
+    *
+    */
+    public function result()
+    {
+        return $this->__prepared->fetchAll(PDO::FETCH_OBJ);
+    }
+
 
     /*
     *
@@ -197,7 +220,11 @@ class DB
             foreach ($this->__where_condition as $__key => $__value)
                 $this->__prepared->bindValue(":$__key", $__value);
 
-        $this->__prepared->execute();
+        try {
+            $this->__prepared->execute();
+        } catch (Exception $e) {
+            return false;
+        }
         return TRUE;
     }
 
@@ -223,7 +250,13 @@ class DB
         foreach ($__insert__data as $__key => $__value)
             $this->__prepared->bindValue(":$__key", $__value);
 
-        $this->__prepared->execute();
+        try {
+            $this->__prepared->execute();
+        } catch (Exception $e) {
+            // echo "Error Message: $e";            
+            return false;
+        }
+
         return true;
     }
 

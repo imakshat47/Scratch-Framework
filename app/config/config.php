@@ -31,41 +31,34 @@ global $config;
 |
  */
 
-$config["base_url"] = "";
+$config = [
 
-// Database Setup
-$database = array(
-    'dsn' => '',
-    'host' => '',
-    'database' => '',
-    'user' => '',
-    'password' => ''
+    'BASE_URL' => '',
 
-);
+    'DB' => [
+        'db_dns' => '',
+        'db_host' => '',
+        'db_name' => '',
+        'db_pass' => ''
+    ],
 
-$config["drivers"] = ['Database', 'Session'];
+    'DRIVERS' => [
+        'Session',
+        'database',
+    ],
 
-/*Libaraies*/
-
-
-
-/*
-|--------------------------------------------------------------------------
-| DEFINING FEW PATHS
-|--------------------------------------------------------------------------
- */
-// define('ROOTDIR', $_SERVER['DOCUMENT_ROOT'] . $dirpath);
-// define('HTTP_ASSET_PATH', $config['base_url'] . 'assets/');
-// define('HTTP_IMAGES', $config['base_url'] . 'images/');
-// define('DIR_IMAGE', $_SERVER['DOCUMENT_ROOT'] . $dirpath . 'uploads/');
-// define('UPLOADFILE', $config['base_url'] . 'uploads/');
-
-// Timezone Reference
-$config["time_reference"] = "";
-
-// Time Format
-$config["time_format"] = "";
-
+    'TIME' => [
+        'time_zone' => '',
+        'time_format' => '',
+    ],
+    'FILE_EXTNS' => [
+        'css',
+        'js',
+        'png',
+        'jpeg',
+        'jpg'
+    ]
+];
 
 /*
 |--------------------------------------------------------------------------
@@ -87,10 +80,16 @@ $config["time_format"] = "";
 | DO NOT CHANGE THIS UNLESS YOU FULLY UNDERSTAND THE REPERCUSSIONS!!
 |
 */
+
 $config['permitted_uri_chars'] = 'a-z 0-9~%.:_\-';
 
 $config['preg_replace'] = '/^\//';
 
+/*
+    // --------------------------------------------------------------------
+    // END OF USER CONFIGURABLE SETTINGS.  DO NOT EDIT BELOW THIS LINE
+    // --------------------------------------------------------------------
+*/
 
 /*
 |--------------------------------------------------------------------------
@@ -100,9 +99,11 @@ $config['preg_replace'] = '/^\//';
 | URL to your Scratch root. Typically this will be your auto base URL,
 | 
  */
-$weburl = empty($_SERVER['REQUEST_SCHEME']) ? "http" : $_SERVER['REQUEST_SCHEME'] . "://" . $_SERVER['HTTP_HOST'];
-$dirpath = str_replace(basename($_SERVER['SCRIPT_NAME']), "", $_SERVER['SCRIPT_NAME']);
-$config['auto_base_url'] = $weburl . $dirpath;
+
+
+$config['web_url'] =  empty($_SERVER['REQUEST_SCHEME']) ? "http" : $_SERVER['REQUEST_SCHEME'] . "://" . $_SERVER['HTTP_HOST'];
+
+$config['dir_path'] = str_replace(basename($_SERVER['SCRIPT_NAME']), "", $_SERVER['SCRIPT_NAME']);
 
 /*
 |--------------------------------------------------------------------------
@@ -111,7 +112,11 @@ $config['auto_base_url'] = $weburl . $dirpath;
 | If BASE URL not set then Auto BASE URL will be used
 | But, it's recomended to use BASE URL
  */
-$config["base_url"] = empty($config["base_url"]) ? $config["auto_base_url"] : $config["base_url"];
 
+$config['BASE_URL'] = str_replace("/public", "", empty($config['BASE_URL']) ? $config['web_url'] . $config['dir_path'] : $config['BASE_URL']);
+$config["ROOT_DIR"] =  $_SERVER['DOCUMENT_ROOT'] . $config['dir_path'];
 
-$config['db'] = $database;
+$config['HTTP_ASSET_PATH'] = $config['BASE_URL'] . 'assets/';
+$config['HTTP_IMAGES'] = $config['BASE_URL'] . 'assets/images/';
+$config['UPLOAD_FILE'] = $config['BASE_URL'] . 'assets/uploads/';
+$config['DIR_IMAGE'] = $config["ROOT_DIR"] . 'assets/images/';

@@ -7,28 +7,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Favicon -->
-    <link rel="FaviconIcon" href="<?= Images ?>logo.png" type="image/x-icon" />
-    <link rel="shortcut icon" href="<?= Images ?>logo.png" type="image/x-icon" />
+    <link rel="FaviconIcon" href="<?= HTTP_IMAGES ?>logo.png" type="image/x-icon" />
+    <link rel="shortcut icon" href="<?= HTTP_IMAGES ?>logo.png" type="image/x-icon" />
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="<?= base_url(Css . 'bootstrap.min.css') ?>">
+    <link rel="stylesheet" href="<?= HTTP_ASSET_PATH ?>css/bootstrap.min.css">
     <!-- Custome CSS -->
-    <link rel="stylesheet" href="<?= base_url(Css . 'style.css') ?>">
+    <link rel="stylesheet" href="<?= HTTP_ASSET_PATH ?>css/style.css">
 
     <!-- Meta Data -->
     <?php if (isset($metadata)) : ?>
-        <meta name="name" content="<?= empty($matadata['name']) ? " " : $matadata['name'] ?>" />
+        <meta name="name" content="<?= empty($metadata['name']) ? " " : $metadata['name'] ?>" />
         <meta name="title" content="<?= $title ?>" />
-        <meta name="description" content="<?= empty($matadata['description']) ? " " : $matadata['description'] ?>" />
-        <meta name="keywords" content="<?= empty($matadata['keywords']) ? " " : $matadata['keywords'] ?>" />
+        <meta name="description" content="<?= empty($metadata['description']) ? " " : $metadata['description'] ?>" />
+        <meta name="keywords" content="<?= empty($metadata['keywords']) ? " " : $metadata['keywords'] ?>" />
 
         <!-- Meta Property -->
         <?php if (isset($og_data)) { ?>
             <meta property="og:title" content="<?= $title ?>" />
             <meta property="og:type" content="website" />
             <meta property="og:url" content="<?= empty($og_data['url']) ? base_url() : $og_data['url'] ?>" />
-            <meta property="og:site_name" content="<?= empty($og_data['name']) ? $matadata['name'] : $og_data['name'] ?>" />
-            <meta property="og:description" content="<?= empty($og_data['description']) ? $matadata['description'] : $og_data['description'] ?>" />
+            <meta property="og:site_name" content="<?= empty($og_data['name']) ? $metadata['name'] : $og_data['name'] ?>" />
+            <meta property="og:description" content="<?= empty($og_data['description']) ? $metadata['description'] : $og_data['description'] ?>" />
     <?php }
     endif; ?>
     <!-- Theme Color -->
@@ -45,10 +45,10 @@
 
 <body>
 
-    <header class="navbar navbar-expand-lg navbar-light bg-blue border-bottom sticky-top">
+    <!-- <header class="navbar navbar-expand-lg navbar-light bg-blue border-bottom sticky-top">
         <nav class="container p-2">
             <div class="col-sm-12 col-lg-2">
-                <a class="navbar-brand  color-white" href="<?= base_url() ?>"><img src="<?= Images ?>logo.png" height="25px" width="25px" alt="barnd Logo"><b> Scratch</b></a>
+                <a class="navbar-brand  color-white" href="<?= base_url() ?>"><img src="<?= HTTP_IMAGES ?>logo.png" height="25px" width="25px" alt="barnd Logo"><b> Scratch</b></a>
             </div>
 
             <ul class="col-sm-12 col-lg-8 nav">
@@ -90,4 +90,4 @@
                 </li>
             </ul>
         </nav>
-    </header>
+    </header> -->

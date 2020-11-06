@@ -3,45 +3,58 @@
 *   Here we set enviroment variables for our project
 */
 
+foreach ([
+    'config',
+    'route',
+] as $__file)
+    if (file_exists("../app/config/$__file.php"))
+        require_once "../app/config/$__file.php";
+/* NOTE: UN-COMMENT BELOW LINES & COMMENT ABOVE LINES IF NOT USING VIRTUAL HOST */
+// if (file_exists("app/config/$__file.php"))
+//     require_once "app/config/$__file.php";
+
 // --------------------------------------------------------------------
 // USER CONFIGURABLE SETTINGS.  EDIT BELOW THIS LINES FOR CHANGES
 // --------------------------------------------------------------------
 
 /*
-* Set ENV variable below,
+// --------------------------------------------------------------------
+// SETTING ENV VARIABLES. OVERRIDES CONFIG FILE
+// --------------------------------------------------------------------
 */
-$env_variables = [
-    'base_url' => '',
-    'environment' => '',
+
+$__env_var = [
+    'BASE_URL' => '',
+    'ROOT_DIR' => '',
+    'HTTP_ASSET_PATH' => '',
+    'HTTP_IMAGES' => '',
+    'UPLOAD_FILE' => '',
+    'DIR_IMAGE' => '',
 ];
 
 /*
-* Set Routes Names bellow
-* Can define your own path here too
+*---------------------------------------------------------------
+* APPLICATION ENVIRONMENT
+*---------------------------------------------------------------
+*
+* You can load different configurations depending on your
+* current "environment"
+* Setting the environment also influences things like logging and error reporting.
+*
+* This can be set to anything, but default usage is:
+*
+*     development
+*     testing
+*     production
+*
+* NOTE: If you change these, also change the error_reporting() code below
 */
 
-$env_routes = [
-    'APP' => 'app/',                        // App files path
-
-    'SYSTEM' => 'system/',                  //System files path
-
-    'CONFIG' => 'app/config/',                //Config folder path
-    'CONTROLLERS' => 'app/controllers/',     //controlelrs path
-    'VIEWS' => 'app/views/',                //views path
-    'MODELS' => 'app/models/',              //Model Folder Path
-
-    'IMAGES' => 'assets/images/',             // Path to iamges folder
-    'CSS' => 'assets/css/',                  // Path to CSS folder
-    'JS' => 'assets/js/',                   // Path to js folder
-];
+$__env_var['ENVIRONMENT'] = 'development';
 
 // --------------------------------------------------------------------
 // END OF USER CONFIGURABLE SETTINGS.  DO NOT EDIT BELOW THIS LINE
 // --------------------------------------------------------------------
 
-foreach ($env_variables as $key => $value) {
-    $_ENV[$key] = $value;
-}
-
-foreach ($env_routes as $key => $value)
-    define("$key", "$value");
+foreach ($__env_var as $__key => $__value)
+    define($__key, empty($__value) ? $config[$__key] : $__value);

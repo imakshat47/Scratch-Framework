@@ -30,4 +30,8 @@
 * @filesource
 */
 
-require_once("public/index.php");
+// --------------------------------------------------------------------
+// END OF USER CONFIGURABLE SETTINGS.  DO NOT EDIT BELOW THIS LINE
+// --------------------------------------------------------------------
+
+require_once('public/server.php');

@@ -1,21 +1,17 @@
 <?php
 class Errors extends Controller
 {
-    // function __construct()
-    // {
-    // }
-
-    function index()
+    function error($err)
     {
-        echo "Hell";
+        $data = [
+            'title' => 'Error | Controller',
+            'msg' => $err
+        ];
+        $this->load->view('essentials/errors', $data);
     }
 
-    function _isError($_isError)
+    function _404($isError)
     {
-        echo $_isError;
-        // $this->load->view('errors', [
-        //     'msg' => $_isError,
-        //     'title' => 'Error'
-        // ]);
+        $this->load->view('essentials/_404');
     }
 }

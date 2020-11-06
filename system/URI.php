@@ -2,20 +2,16 @@
 
 class URI
 {
-    function __construct()
-    {
-    }
-
     /*
     *   @param string url
     *   @return uri array or false
     */
-    function __is_valid_uri($uri = null)
+    function __is_valid_uri($___uri = null)
     {
-        if ($uri) {
+        if ($___uri) {
             global $config;
-            $_uri =  filter_var(rtrim(preg_replace($config['preg_replace'], '', $uri), '/'), FILTER_SANITIZE_URL);
-            return  explode('/', $_uri);
+            $__uri =  filter_var(rtrim(preg_replace($config['preg_replace'], '', $___uri), '/'), FILTER_SANITIZE_URL);
+            return  explode('/', $__uri);
         } else
             return false;
     }
@@ -39,13 +35,29 @@ class URI
     }
 
     /*
+    *   RETURNS POST VALUES FOR KEYS
+    */
+    function post($_key)
+    {
+        return isset($_POST[$_key]) ? $_POST[$_key] : null;
+    }
+
+    /*
+    *   RETURNS POST VALUES FOR KEYS
+    */
+    function sanitized_post($_key, $_filter = FILTER_SANITIZE_STRING)
+    {
+        return htmlspecialchars(strip_tags(filter_var(trim($this->post($_key))), $_filter));
+    }
+
+    /*
     *   RETURNS URI SEGMENT 
     */
     function segment($__segment)
     {
         if ($__segment) {
-            $_uri_segment = explode('/', preg_replace('/^\//', '', $_SERVER['REQUEST_URI']));
-            if ($__uri__segment = $_uri_segment[$__segment])
+            $__uri_segment = explode('/', preg_replace('/^\//', '', $_SERVER['REQUEST_URI']));
+            if ($__uri__segment = $__uri_segment[$__segment])
                 return $__uri__segment;
         } else {
             trigger_error("URI segment '0'", E_USER_WARNING);

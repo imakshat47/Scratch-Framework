@@ -3,9 +3,8 @@ class Session
 {
     function __construct()
     {
-        if (session_status() == PHP_SESSION_NONE) {
+        if (session_status() == PHP_SESSION_NONE)
             session_start();
-        }
     }
 
     private function __is_valid($__key)
@@ -15,13 +14,10 @@ class Session
         return true;
     }
 
-    function __bootstrap_session()
+    public function __bootstrap_session()
     {
         $this->__update__temp_data();
-
-        // $this->__set_session('_last_uri', $__uri);
-        // $this->__set_session('_current_uri', $__url);
-        // $this->__set_session('_last_session', $__token);
+        $this->__set_session('_last_session', time());
     }
 
     private function __set_session($__key, $__value)
@@ -42,7 +38,7 @@ class Session
     }
 
 
-    private function __update__temp_data()
+    protected function __update__temp_data()
     {
         if (isset($_SESSION['__flash_session'])) {
             $__flashs = $_SESSION['__flash_session'];
