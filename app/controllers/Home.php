@@ -3,7 +3,7 @@ class Home extends BaseController
 {
     function index()
     {
-        echo $data['title'] = "Welcome to Scratch | Home";
+        $data['title'] = "Welcome to Scratch | Home";
         $this->view('home', $data);
 
         /* -or- */

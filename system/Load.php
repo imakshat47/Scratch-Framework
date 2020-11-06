@@ -1,13 +1,23 @@
 <?php
+
+// --------------------------------------------------------------------
+// END OF USER CONFIGURABLE SETTINGS.  DO NOT EDIT BELOW THIS LINE
+// SCRATCH PHP FRAMEWORK
+// --------------------------------------------------------------------
+
 class Load
 {
+    /** PRIVATE PATH SETTING:
+     * VIEWS DIRECTORY
+     * MODELS DIRECTORY
+     */
     private $__view_path = _DIR_ . '../app/views/';
     private $__model_path = _DIR_ . '../app/models/';
 
-    function __construct()
-    {
-    }
-
+    /** CHECKS IF VARIABLE SET, RETURNS:
+     * FALSE IF SET
+     * TRUE IF NOT SET
+     */
     private function __set__($__var__)
     {
         if (isset($this->$__var__))
@@ -16,7 +26,7 @@ class Load
     }
 
     /*
-    *   @param View name and View Arg
+    *   @param VIEW NAME AND ARRAY ARGUMENTS
     */
     public function view($__view = null, $__arg = null)
     {
@@ -31,7 +41,7 @@ class Load
     }
 
     /*
-    * @paarm Model Name
+    * @paarm MODEL NAME
     */
     public function model($__model)
     {
@@ -50,23 +60,25 @@ class Load
             __error("Misisng Model: " . ucwords($__view));
     }
 
-    /*
-    * CHECK IF FILE EXISTS
-    */
+    /** CHECKS IF FILE EXISTS, RETURNS:
+     * TRUE IF EXISTS
+     * FALSE IF NOT EXISTS    
+     */
     private function __is_file($__file)
     {
         if (file_exists($__file))
-            return $__file;
+            return true;
         return false;
     }
 
-    /*
-    *   CHECKS IF CLASS EXISTS
-    */
+    /**   CHECKS IF CLASS EXISTS, RETURNS:
+     * TRUE IF EXISTS
+     * FALSE IF NOT EXISTS    
+     */
     private function __is_class($__class)
     {
         if (class_exists($__class))
-            return $__class;
+            return true;
         return false;
     }
 }

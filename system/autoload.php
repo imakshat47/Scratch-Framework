@@ -2,12 +2,22 @@
 
 // --------------------------------------------------------------------
 // END OF USER CONFIGURABLE SETTINGS.  DO NOT EDIT BELOW THIS LINE
+// SCRATCH PHP FRAMEWORK
 // --------------------------------------------------------------------
 
 class Autoload
 {
+    /** AUTOLOAD CONSTRUCTS */
     function __construct()
     {
+        /** LOAD SYSTEM FILES:
+         * DATABASE
+         * SESSION
+         * URI
+         * LOADER (LOAD)
+         * MODEL
+         * CONTROLLER
+         */
         $__system_files = [
             '__database' => 'Database',
             '__session' => 'Session',
@@ -20,6 +30,10 @@ class Autoload
             $this->__system_load($__system_file, $__system_obj);
     }
 
+    /** SYSTEM FILE CHECK:
+     * RUNS CHECK FOR SYSTEM FILES
+     * AND INSTANTIATE SYSTEM FILES
+     */
     function __system_load($__system_name = false, $__system_obj)
     {
         $__system_file = _DIR_ . "../system/$__system_name.php";

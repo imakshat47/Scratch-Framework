@@ -10,9 +10,7 @@
     <link rel="FaviconIcon" href="<?= HTTP_IMAGES ?>logo.png" type="image/x-icon" />
     <link rel="shortcut icon" href="<?= HTTP_IMAGES ?>logo.png" type="image/x-icon" />
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="<?= HTTP_ASSET_PATH ?>css/bootstrap.min.css">
-    <!-- Custome CSS -->
+    <!-- Custome CSS  -->
     <link rel="stylesheet" href="<?= HTTP_ASSET_PATH ?>css/style.css">
 
     <!-- Meta Data -->
@@ -44,50 +42,3 @@
 </head>
 
 <body>
-
-    <!-- <header class="navbar navbar-expand-lg navbar-light bg-blue border-bottom sticky-top">
-        <nav class="container p-2">
-            <div class="col-sm-12 col-lg-2">
-                <a class="navbar-brand  color-white" href="<?= base_url() ?>"><img src="<?= HTTP_IMAGES ?>logo.png" height="25px" width="25px" alt="barnd Logo"><b> Scratch</b></a>
-            </div>
-
-            <ul class="col-sm-12 col-lg-8 nav">
-                <li class="nav-item active">
-                    <a class="nav-link color-white" href="<?= base_url('Home') ?>">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link color-white" href="<?= base_url() ?>">User Guide</a>
-                </li>
-                <li class="nav-item  d-none d-md-block">
-                    <a class="nav-link color-white" href="<?= base_url('examples/Services/') ?>">Examples</a>
-                </li>
-                <li class="nav-item d-none d-md-block">
-                    <a class="nav-link color-white" href="#">Themes</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link color-white" href="#">Blog</a>
-                </li>
-            </ul>
-
-            <ul class="col-sm-12 col-lg-2 nav">
-                <li class="nav-item dropdown">
-                    <a class="nav-link color-white dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        v1.0
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">v2.0</a>
-                        <a class="dropdown-item" href="#">v3.0</a>
-
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="<?= base_url() ?>">All Version</a>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link color-white" href="#">G</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link color-white" href="#">O </a>
-                </li>
-            </ul>
-        </nav>
-    </header> -->

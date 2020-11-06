@@ -1,7 +1,4 @@
 <?php
-
-define('Views', "app/views/");
-
 class BaseController extends Controller
 {
     /*
@@ -18,7 +15,7 @@ class BaseController extends Controller
     */
     function view($page, $data = null)
     {
-        $this->show_404($page);
+        $this->__show_404($page);
 
         // SET METADATA
         $data['metadata'] = [
@@ -29,9 +26,9 @@ class BaseController extends Controller
 
         // SET OG DATA
         $data['og_data'] = [
-            'url' => '',
-            'site_name' => '',
-            'description' => ''
+            'url' => 'http://www.scratch.com/',
+            'site_name' => 'SCRATCH',
+            'description' => 'A flexible and highly scalable php Framework, Scratch. Build beautiful websites and powerful Apps'
         ];
 
         /* IF NOT TITLE SET BY DEFAULT */
@@ -43,16 +40,15 @@ class BaseController extends Controller
         $this->load->view('partials/footer');
     }
 
-    /*
-    * CHECKS IF PAGE EXISTS
-    * RETURN
-    */
-    public function show_404($page)
+    /** CHECKS IF PAGE EXISTS
+     * RETURN ERRO IF MISSING
+     */
+    public function __show_404($page)
     {
         if (!file_exists(_DIR_ . '../app/views/' . $page . '.php')) {
-            $this->load->view('essentials/errors', [
-                'title' => 'Error | View',
-                'msg' => "View $page.php not found!!"
+            $this->load->view('_404', [
+                'title' => 'File Misisng',
+                'msg' => "Missing View:  $page.php"
             ]);
             exit(5);
         } else  return;

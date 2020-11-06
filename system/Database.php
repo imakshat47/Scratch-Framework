@@ -1,10 +1,19 @@
 <?php
+
+// --------------------------------------------------------------------
+// END OF USER CONFIGURABLE SETTINGS.  DO NOT EDIT BELOW THIS LINE
+// SCRATCH PHP FRAMEWORK
+// --------------------------------------------------------------------
+
 class Database
 {
 
-    /*    
-    *   SET ATTRIBUTES FOR PDO CONNECTION
-    */
+    /**   SET ATTRIBUTES FOR PDO CONNECTION
+     * ERROR MODE
+     * ATTRIBUTE CASE
+     * EMPTY / NULL STRINGS
+     * RESULT FETCH MODE
+     */
     private $__attribute = [
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
         PDO::ATTR_CASE => PDO::CASE_NATURAL,
@@ -38,25 +47,28 @@ class Database
     */
     private $__set_data;
 
-    /*
-    *   DATABASE CONSTRUCTOR
-    */
+    /**   DATABASE CONSTRUCTOR
+     * COONECTS WITH DATABASE FROM CONFIG FILE
+     * OR RETURNS EXCEPTION
+     */
     function __construct()
     {
-        global $config;
         try {
-            $__db_host = empty($config['db']['host']) ? 'localhost' : $config['db']['host'];
-            $__db_name = empty($config['db']['database']) ? 'scratch' : $config['db']['database'];
-            $__db_user = empty($config['db']['user']) ? 'root' : $config['db']['user'];
-            $__db_pass = empty($config['db']['password']) ? '' : $config['db']['password'];
+            global $config;
 
-            $__db_dns = empty($config['db']['dns']) ? "mysql:host=$__db_host; dbname=$__db_name;" : $config['db']['dns'];
+            $__db_host = empty($config['DB']['db_host']) ? 'localhost' : $config['DB']['db_host'];
+            $__db_name = empty($config['DB']['db_name']) ? 'scratch' : $config['DB']['db_name'];
+
+            $__db_user = empty($config['DB']['db_user']) ? 'root' : $config['DB']['db_user'];
+            $__db_pass = empty($config['DB']['db_pass']) ? '' : $config['DB']['db_pass'];
+
+            $__db_dns = empty($config['DB']['db_dns']) ? "mysql:host=$__db_host; dbname=$__db_name;" : $config['DB']['db_dns'];
 
             $this->__conn =  new PDO($__db_dns, $__db_user, $__db_pass, $this->__attribute);
             return true;
         } catch (PDOException $e) {
             echo 'Error' . $e->getMessage();
-        }        
+        }
     }
 
     /*
@@ -75,7 +87,6 @@ class Database
     *   @return OBJECT INSTANCE
     *
     */
-
     public function select($__select__data = "*")
     {
         $this->__message = "SELECT $__select__data ";
@@ -140,7 +151,7 @@ class Database
     /*
     *
     *   TO RETURN RESULT IN ARRAY
-    *   @return QUERY ALL RESULTS IN OBJECT ARRAY
+    *   @return QUERY FIRST ROW RESULT IN OBJECT ARRAY
     *
     */
     public function first_row()
@@ -263,7 +274,7 @@ class Database
     /*
     *
     *   @param QUERY
-    *   @return RESULT FOR THE QUERY
+    *   @return RESULT FOR THE USER DEFINED-QUERY
     *
     */
     public function query($__msg)

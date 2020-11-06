@@ -2,6 +2,7 @@
 
 // --------------------------------------------------------------------
 // END OF USER CONFIGURABLE SETTINGS.  DO NOT EDIT BELOW THIS LINE
+// SCRATCH PHP FRAMEWORK
 // --------------------------------------------------------------------
 
 class Controller

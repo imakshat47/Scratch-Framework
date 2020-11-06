@@ -1,5 +1,10 @@
 <?php
 
+// --------------------------------------------------------------------
+// END OF USER CONFIGURABLE SETTINGS.  DO NOT EDIT BELOW THIS LINE
+// SCRATCH PHP FRAMEWORK
+// --------------------------------------------------------------------
+
 class URI
 {
     /*
@@ -28,7 +33,7 @@ class URI
     /*
     * RETRUNS LAST INVOKED URI IN SYSTEM
     */
-    function back_uri()
+    function last_uri()
     {
         if ($this->server('HTTP_REFERER'))
             return $this->server('HTTP_REFERER');
@@ -43,7 +48,7 @@ class URI
     }
 
     /*
-    *   RETURNS POST VALUES FOR KEYS
+    *   RETURNS POST VALUES FOR KEYS SANITIZED
     */
     function sanitized_post($_key, $_filter = FILTER_SANITIZE_STRING)
     {
@@ -51,7 +56,7 @@ class URI
     }
 
     /*
-    *   RETURNS URI SEGMENT 
+    *   RETURNS URI SEGMENT WITH INT SEGMENT 
     */
     function segment($__segment)
     {

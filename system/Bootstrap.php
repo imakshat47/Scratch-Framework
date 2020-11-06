@@ -2,16 +2,27 @@
 
 // --------------------------------------------------------------------
 // END OF USER CONFIGURABLE SETTINGS.  DO NOT EDIT BELOW THIS LINE
+// SCRATCH PHP FRAMEWORK
 // --------------------------------------------------------------------
 
 class Bootstrap
 {
 
+    /** BOOTSTRAP CONSTRUCTOR 
+     * HANDLE URI
+     * AUTOLOAD SYSTEM FILES
+     * DEFINE METHODS
+     * SETTING MVC FLOW CONTROL
+    */
     function __construct()
     {
-        /* URL GET METHOD */
+        /** URL GET METHOD:
+         * URI FROM HEADER
+         *  NULL FOR BASE URL
+         */ 
         $__url = isset($_GET['url']) ? $_GET['url'] : null;
 
+        /** FILE EXTENSIONS ALLOWED */
         global $config;
         foreach ($config['FILE_EXTNS'] as $__key)
             if (strpos($__url, $__key) != false) {                
@@ -19,13 +30,21 @@ class Bootstrap
                 return;
             }
 
-        /* INVOKING AUTOLOADER */
+        /** INVOKING AUTOLOADER:
+         * SYSTEM/AUTOLOAD.PHP 
+         * LOADING ALL SYSTEM FILES
+         */
         require_once(_DIR_ . '../system/autoload.php');
 
-        /* INSTANTIATING AUTOLOADER */
+        /** INSTANTIATING AUTOLOADER:
+         * LOADS SYSTEM FILES
+         * GET INSTANCE
+         */
         $this->__autoload = new Autoload();
 
-        /* SESSION SET UP */
+        /** SESSION SET UP:
+         * AUTO SAVE SESSION FIRST VARIABLES
+         */
         $this->__autoload->__session->__bootstrap_session();
 
         /* BASE URL METHOD */
@@ -70,7 +89,11 @@ class Bootstrap
             }
         }
 
-        /* SANATIZE,VALIDATE, INVOKES URL CONTROLLERS AND METHODS */
+        /** URI FLOW CONTROL:
+         * SANATIZE URI,
+         * VALIDATE URI, 
+         * INVOKES URI CONTROLLER WITH METHODS AND ARGUMENTS
+         */
         global $route;
         $this->__autoload->__controller->__get_controller(empty($this->__autoload->__uri->__is_valid_uri($__url)) ? [$route["base_controller"]] :  $this->__autoload->__uri->__is_valid_uri($__url));
     }

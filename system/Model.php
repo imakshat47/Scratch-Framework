@@ -1,6 +1,15 @@
 <?php
+
+// --------------------------------------------------------------------
+// END OF USER CONFIGURABLE SETTINGS.  DO NOT EDIT BELOW THIS LINE
+// SCRATCH PHP FRAMEWORK
+// --------------------------------------------------------------------
+
 class Model
 {
+    /** MODEL CONSTRUCTS:
+     * DATABASE INSTANCE
+     */
     function __construct()
     {
         /* DATABASE INSTANCE */
