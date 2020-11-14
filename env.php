@@ -1,4 +1,5 @@
 <?php
+
 /** SETTING ENVIRONMENT VARABLES:
  * APP BASE URL
  * ROOT DIRECTORY PATH
@@ -6,7 +7,7 @@
  * IMAGES DIRECTORY PATH
  * UPLAOD DIRECTORY PATH
  * APP DEVELOPMENT ENVIRONMENT 
-*/
+ */
 
 /**sETTING CONFIG AND ROUTE FILES:
  * APP/CONFIG/CONFIG.PHP
@@ -18,9 +19,6 @@ foreach ([
 ] as $__file)
     if (file_exists("../app/config/$__file.php"))
         require_once "../app/config/$__file.php";
-/* NOTE: UN-COMMENT BELOW LINES & COMMENT ABOVE LINES IF NOT USING VIRTUAL HOST */
-// if (file_exists("app/config/$__file.php"))
-//     require_once "app/config/$__file.php";
 
 /*
     // --------------------------------------------------------------------
@@ -40,7 +38,7 @@ $__env_var = [
     'ROOT_DIR' => '',
     'HTTP_ASSET_PATH' => '',
     'HTTP_IMAGES' => '',
-    'UPLOAD_FILE' => '',    
+    'UPLOAD_FILE' => '',
 ];
 
 /*
@@ -60,7 +58,7 @@ $__env_var = [
 * NOTE: If you change these, also change the error_reporting() IN PUBLIC/SERVER.PHP
 */
 
-$__env_var['ENVIRONMENT'] = 'testing';
+$__env_var['ENVIRONMENT'] = 'development';
 
 /*
     // --------------------------------------------------------------------

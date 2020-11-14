@@ -5,9 +5,12 @@
  * SOME NECESSARY VARIABLES:
  */
 
-require_once "../env.php";
-/* NOTE: UN-COMMENT BELOW LINE & COMMENT ABOVE LINE IF NOT USING VIRTUAL HOST */
-// require_once "env.php";
+if (file_exists("../env.php"))
+    require_once "../env.php";
+else {    
+    echo '<h2><center>Set Up a Virtual host to start!!</center></h2>';
+    exit(1);
+}
 
 /*
 *---------------------------------------------------------------
@@ -24,8 +27,6 @@ require_once "../env.php";
 switch (ENVIRONMENT) {
     case 'development':
         define("_DIR_", ROOT_DIR);
-        /* NOTE: UN-COMMENT BELOW LINE & COMMENT ABOVE LINE IF NOT USING VIRTUAL HOST */
-        // define("_DIR_", ROOT_DIR . 'public/');
         ini_set('display_errors', 1);
         ini_set('display_startup_errors', 1);
         error_reporting(E_ALL);
