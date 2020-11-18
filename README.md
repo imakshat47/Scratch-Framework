@@ -1,6 +1,6 @@
 # Welcome to Scratch
 
-## Scratch is a powerful, flexible and highly scalable php Framework. Build beautiful websites and powerful Applications!!
+## Scratch is a powerful, flexible and highly scalable PHP Framework. Build Beautiful Websites & Powerful Applications!!
 
 ## How to set up:
 1. Set up a virtaul host to '/public'
