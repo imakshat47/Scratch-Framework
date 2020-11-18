@@ -4,7 +4,12 @@
 
 ## How to set up:
 1. Set up a virtaul host to '/public'
-2. Go to url and screen says: All set to go!!
+2. Go to url (virtaulhost) and screen says: All set to go!
+
+## Special Features:
+1. Component Based Design
+2. Object Oriented Design
+3. SEO Support Added
 
 ## System supports:
 1. Database

@@ -33,7 +33,7 @@ class URI
     /*
     * RETRUNS LAST INVOKED URI IN SYSTEM
     */
-    function last_uri()
+    function back()
     {
         if ($this->server('HTTP_REFERER'))
             return $this->server('HTTP_REFERER');
@@ -60,12 +60,12 @@ class URI
     */
     function segment($__segment)
     {
-        if ($__segment) {
+        if ($__segment > 0) {
             $__uri_segment = explode('/', preg_replace('/^\//', '', $_SERVER['REQUEST_URI']));
-            if ($__uri__segment = $__uri_segment[$__segment])
+            if ($__uri__segment = $__uri_segment[--$__segment])
                 return $__uri__segment;
         } else {
-            trigger_error("URI segment '0'", E_USER_WARNING);
+            trigger_error("URI segment '$__segment'", E_USER_WARNING);
         }
     }
 }

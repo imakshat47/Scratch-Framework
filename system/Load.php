@@ -30,7 +30,7 @@ class Load
     */
     public function view($__view = null, $__arg = null)
     {
-        // $this->load = new Load();
+        $this->__loader();
         if ($this->__is_file($this->__view_path . $__view . ".php")) {
             if (is_array($__arg))
                 foreach ($__arg as $__keys => $__value)
@@ -80,5 +80,20 @@ class Load
         if (class_exists($__class))
             return true;
         return false;
+    }
+
+    /**   CHECKS IF OBJECTS, RETURNS:
+     *      LOADS OBJECT FOR VARABLES 
+     *
+     */
+    private function __loader()
+    {
+        foreach ([
+            'uri' => 'URI',
+            'session' => 'Session',
+            'load' => 'Load',
+        ] as $__set__var => $__set__key)
+            if ($this->__set__($__set__var))
+                $this->$__set__var = new $__set__key();
     }
 }
