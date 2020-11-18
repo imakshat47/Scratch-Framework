@@ -4,7 +4,7 @@
 
 ## How to set up:
 1. Set up a virtaul host to '/public'
-2. Go to url (virtaulhost) and screen says: All set to go!
+2. Go to url (virtual host) and screen says: All set to go!
 
 ## Special Features:
 1. Component Based Design
@@ -13,16 +13,16 @@
 
 ## System supports:
 1. Database
-    - For interating with database
+    - For Interating With Database
 2. Sessions
-    - For stroing data in web app
+    - For Stroing Data In Web App
 3. MVC Handlers
-    - for easy render and code stucture
-4. URI setter
-    - Easy URI mainpulations
+    - For Easy Render & Code Stucture
+4. URI Setter
+    - Easy URI Mainpulations
 5. Loader
-    - Loads View n Models 
-6. Auto laoder for system files
-    - Got backbone file for system
+    - Loads View & Models 
+6. Auto Laoder For System Files
+    - Backbone File For System
 
 ### All done with system, just build your first App ->
