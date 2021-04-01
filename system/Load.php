@@ -11,8 +11,14 @@ class Load
      * VIEWS DIRECTORY
      * MODELS DIRECTORY
      */
-    private $__view_path = _DIR_ . APP['directory']['view'];
-    private $__model_path = _DIR_ . APP['directory']['model'];
+    private $__view_path =  null;
+    private $__model_path = null;
+
+    function __construct()
+    {
+        $this->__view_path = _DIR_ . $_ENV['APP']['directory']['view'];
+        $this->__model_path = _DIR_ . $_ENV['APP']['directory']['model'];
+    }
 
     /** CHECKS IF VARIABLE SET, RETURNS:
      * FALSE IF SET
@@ -45,8 +51,8 @@ class Load
     */
     public function model($__model)
     {
-        if (file_exists($this->__model_path  . APP['default']['baseModel'] . ".php"))
-            require_once($this->__model_path . APP['default']['baseModel'] . ".php");
+        if (file_exists($this->__model_path  . $_ENV['APP']['default']['baseModel'] . ".php"))
+            require_once($this->__model_path . $_ENV['APP']['default']['baseModel'] . ".php");
         if (!$this->__is_file($this->__model_path . "$__model.php"))
             __error("Misisng Model File: " . ucwords($__model));
         require_once $this->__model_path . "$__model.php";
@@ -82,7 +88,7 @@ class Load
      */
     private function __loader()
     {
-        foreach (APP['view']['loader'] as $__set__var => $__set__key)
+        foreach ($_ENV['APP']['loader'] as $__set__var => $__set__key)
             if ($this->__set__($__set__var))
                 $this->$__set__var = new $__set__key();
     }

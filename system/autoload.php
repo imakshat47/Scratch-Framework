@@ -47,12 +47,27 @@ class Autoload
             $this->__system_load($__system_file, $__system_obj);
 
         /* Default Methods */
+
+        /* Dump all on screen */
+        if (!function_exists('dd')) {
+            function dd($_key = "Scratch here!!", $_exit = true)
+            {
+                print "<pre>";
+                if (is_array($_key))
+                    print_r((array)$_key);
+                else
+                    print_r($_key);
+                print "</pre>";
+                if ($_exit)
+                    exit(5);
+            }
+        }
+
         /* BASE URL METHOD */
         if (!function_exists('base_url')) {
             function base_url($_base_segment = false)
             {
-                global $config;
-                return (empty($config['base_url']) ? BASE_URL : $config['base_url']) . $_base_segment;
+                return (empty($_ENV['base_url']) ? $_ENV['web_url'] : $_ENV['base_url']) . $_base_segment;
             }
         }
 
@@ -62,10 +77,8 @@ class Autoload
             {
                 if (!(strpos($_base_segment, base_url()) !== false))
                     $_base_segment = base_url($_base_segment);
-
                 if ($_time_eclipse)
                     header("refresh:$_time_eclipse;url=$_base_segment");
-
                 header("Location: $_base_segment");
             }
         }
@@ -89,31 +102,20 @@ class Autoload
                 return date(($__date_format == null) ? (empty($config['TIME']['time_format']) ? "Y-m-d H:i:s" : $config['TIME']['time_format']) : $__date_format);
             }
         }
-
+        
         /* ERROR REPORTING METHOD */
         if (!function_exists('__error')) {
             function __error($__error = "Page Not Found !!")
             {
                 if (ENVIRONMENT == 'development')
                     trigger_error($__error, E_USER_ERROR);
+                if (isset($_ENV['fallback_url']) && !empty($_ENV['fallback_url']))
+                    //if not fsockopen ok           
+                    if (!fsockopen(BASE_URL, 80, $errno, $errstr, 30))
+                        header("Location: https://ieeegbpec.github.io/");
                 $__load = new Load();
-                $__load->view(APP['view']['error'], ['msg' => $__error, 'title' => $__error]);
+                $__load->view($_ENV['APP']['view']['error'], ['msg' => $__error, 'title' => $__error]);
                 exit(1);
-            }
-        }
-
-        /* Dump all on screen */
-        if (!function_exists('dd')) {
-            function dd($_key = "Scratch here!!", $_exit = true)
-            {
-                print "<pre>";
-                if (is_array($_key))
-                    print_r((array)$_key);
-                else
-                    print_r($_key);
-                print "</pre>";
-                if ($_exit)
-                    exit(5);
             }
         }
     }

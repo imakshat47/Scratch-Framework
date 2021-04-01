@@ -36,14 +36,29 @@ global $config;
 */
 
 $config = [
+    /**BASE URL FOR SYSTEM /APP */
+    'BASE_URL' => '',
+
+
+
+    /** SET App DEVELOPMENT ENVIRONMENT */
+    'ENVIRONMENT' => 'development',
+
+
+
     /** DEFINE APP VARIABLES */
     'APP' => [
+        // Name of Application
         'name' => 'Scratch',
+        // Fallback url - Redirects to another url if any error
+        'fallback_url' => '',
+        // directory for different MVC components
         'directory' => [
             'controller' => '../app/controllers/',
             'model' => '../app/models/',
             'view' => '../app/views/',
         ],
+        // default seeting of components
         'default' => [
             'controller' => 'Home',
             'method' => 'index',
@@ -51,62 +66,17 @@ $config = [
             'baseController' => 'BaseController',
             'baseModel' => 'Base_Model',
         ],
-        'view' => [
-            'error' => '_404',
-
-            'loader' => [
-                'uri' => 'URI',
-                'session' => 'Session',
-                'load' => 'Load',
-            ],
+        // 404 erro view
+        'error' => '_404',
+        // Loader intances
+        'loader' => [
+            'uri' => 'URI',
+            'session' => 'Session',
+            'load' => 'Load',
         ],
     ],
 
-    /** APP Varaibles for Setup */
-    'app_var' => [
-        'theme_color' => '#4caf50',
 
-        'lang' => 'en',
-        'charset' => 'utf-8',
-        'viewport' => 'width=device-width, initial-scale=1',
-
-        'seo_robots' => 'index, follow',
-
-        'metadata' => [
-            "title" => "Scratch",
-            "type" => "website",
-            "url" => "",
-            "name" => "Scratch",
-            "description" => "A flexible and highly scalable php Framework, Scratch. Build beautiful websites and powerful Applications!!",
-            "keywords" => "Scratch, PHP Framework, Website Pramework",
-        ],
-
-        'css' => [            
-        ],
-
-        'js' => [
-        ],
-    ],
-    /** DEFINE API VARIABLES */
-    'API' => [
-        'allow_methods' => implode(',', [
-            'GET',
-            'POST',
-            'PUT',
-        ]),
-        'max_age' => '3600',
-        'allowed_origin' => implode(',', [
-            '*',
-        ]),
-        'content_type' =>
-        implode(',', [
-            'application/json',
-        ]),
-        'charset' => 'UTF-8',
-    ],
-
-    /**BASE URL FOR SYSTEM /APP */
-    'BASE_URL' => '',
 
     /** SET DB VARIABLES
      * DATABASE DNS
@@ -125,6 +95,8 @@ $config = [
         'db_pass' => ''
     ],
 
+
+
     /** DRIVERS
      * SESSION
      * DATABASE
@@ -132,9 +104,11 @@ $config = [
      * PAGINATION
      */
     'DRIVERS' => [
-        'Session',
+        'session',
         'database',
     ],
+
+
 
     /** SET GET_TIME METHOD: 
      * TIMEZONE 
@@ -144,6 +118,8 @@ $config = [
         'time_zone' => 'Asia/Kolkata',
         'time_format' => 'Y-m-d H:i:s',
     ],
+
+
 
     /** FILE EXTENSIONS ALLOWED TO ADD 
      * 'css',

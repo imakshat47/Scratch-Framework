@@ -18,6 +18,7 @@ ini_set("session.cookie_httponly", true);
  */
 foreach ([
     'config',
+    'app',
     'route',
 ] as $__file)
     if (file_exists("../app/config/$__file.php"))
@@ -37,15 +38,10 @@ foreach ([
 */
 
 $__env_var = [
-    'APP' => [],
-    'API' => [],
-
     'BASE_URL' => '',
-    
-    'ROOT_DIR' => '',
-    'HTTP_ASSET_PATH' => '',
-    'HTTP_IMAGES' => '',
-    'UPLOAD_FILE' => '',
+    'APP' => '',
+    'DRIVERS' => '',
+    'web_url' => '',
 ];
 
 /*
@@ -65,7 +61,14 @@ $__env_var = [
 * NOTE: If you change these, also change the error_reporting() IN PUBLIC/SERVER.PHP
 */
 
-$__env_var['ENVIRONMENT'] = 'development';
+$__constant_var = [
+    'ENVIRONMENT' => '',
+    'ROOT_DIR' => '',
+    'HTTP_ASSET_PATH' => '',
+    'HTTP_IMAGES' => '',
+    'UPLOAD_FILE' => '',
+    'API' => $app['api'],
+];
 
 /*
     // --------------------------------------------------------------------
@@ -74,4 +77,7 @@ $__env_var['ENVIRONMENT'] = 'development';
 */
 
 foreach ($__env_var as $__key => $__value)
+    $_ENV[$__key] = empty($__value) ? $config[$__key] : $__value;
+
+foreach ($__constant_var as $__key => $__value)
     define($__key, empty($__value) ? $config[$__key] : $__value);

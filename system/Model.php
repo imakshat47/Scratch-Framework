@@ -29,11 +29,11 @@ class Model
 
     /**
      *
-     * @param TABLE NAME, SELECT DATA, WHERE CONDITION (OPTIONAL)
+     * @param TABLE NAME, WHERE CONDITION (OPTIONAL), SELECT DATA (OPTIONAL), ORDER BY, GROUP BY
      * @return QUERY RESULT
      *
      */
-    protected function fetch_all($table_name, $select_data = '*', $where_condition = null, $order_by = null)
+    protected function fetch_all($table_name, $where_condition = null, $select_data = '*', $order_by = null, $group_by = null)
     {
         $this->db
             ->select($select_data)
@@ -41,28 +41,33 @@ class Model
             ->where($where_condition);
         if ($order_by)
             $this->db->order_by($order_by['by'], $order_by['order']);
+            /** @todo Add Group by function */
+        // if ($group_by) {
+        //     if (is_array($group_by))
+        //         $group_by = implode(',', $group_by);                
+        // }
         return $this->db->get()->result_array();
     }
 
 
     /**
      *
-     * @param TABLE NAME, SELECT DATA, WHERE CONDITION (OPTIONAL)
+     * @param TABLE NAME, WHERE CONDITION (OPTIONAL), SELECT DATA (OPTIONAL)
      * @return QUERY RESULT 
      *
      */
-    protected function fetch_row($table_name, $select_data = '*', $where_condition = null)
+    protected function fetch_row($table_name, $where_condition = null, $select_data = '*')
     {
         return $this->db->select($select_data)->from($table_name)->where($where_condition)->get()->result();
     }
 
     /**
      *
-     * @param TABLE NAME, SELECT DATA, WHERE CONDITION (OPTIONAL)
+     * @param TABLE NAME, WHERE CONDITION (OPTIONAL), SELECT DATA (OPTIONAL)
      * @return QUERY RESULT 
      *
      */
-    protected function fetch($table_name, $select_data = '*', $where_condition = null)
+    protected function fetch($table_name, $where_condition = null, $select_data = '*')
     {
         return $this->db->select($select_data)->from($table_name)->where($where_condition)->get()->first_row();
     }

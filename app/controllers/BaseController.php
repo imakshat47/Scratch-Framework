@@ -22,17 +22,14 @@ class BaseController extends Controller
         $this->__show_404($page);
 
         // SETTING APP VARS
-        global $config;
-        if (!empty($config['app_var']))
-            foreach ($config['app_var'] as $_key => $_val)
+        global $app;
+        if (!empty($app['app']))
+            foreach ($app['app'] as $_key => $_val)
                 $data[$_key] = isset($data[$_key]) ?  array_merge($data[$_key], $_val) : $_val;
 
         /* IF NOT TITLE SET BY DEFAULT */
-        $data['title'] = empty($data['title']) ? APP . " | " . ucfirst($page) : $data['title'];
+        $data['title'] = empty($data['title']) ? $_ENV['APP'] . " | " . ucfirst($page) : $data['title'];
 
-        if (isset($this->session->session('user')['token']))
-            foreach (['_username', '_user_profile_pic'] as $_row)
-                $data[$_row] = $this->$_row;
 
         /* Renders Partials and request page */
         $this->load->view('partials/header', $data);

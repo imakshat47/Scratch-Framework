@@ -10,20 +10,19 @@ class Controller
     private $__controller_name = null;
     private $__method_name = null;
     private $__method_arg = null;
-    private $__controller_path = _DIR_ . APP['directory']['controller'];
+    private $__controller_path = null;
 
     function __construct()
     {
-        global $config;
+        // Defining Controller dir path
+        $this->__controller_path =  _DIR_ . $_ENV['APP']['directory']['controller'];
         /* DRIVER LOADER */
-        array_push(
-            $config['DRIVERS'],
+        /* INITIALIZE DRIVER OBJECT */
+        foreach (array_merge($_ENV['DRIVERS'], [
             'Load',
             'Model',
             'URI'
-        );
-        /* INITIALIZE DRIVER OBJECT */
-        foreach ($config['DRIVERS'] as $__driver) {
+        ]) as $__driver) {
             $__load_obj = strtolower($__driver);
             $this->$__load_obj =  new $__driver();
         }
@@ -35,8 +34,8 @@ class Controller
      */
     function __get_controller($__uri_array = null)
     {
-        if (file_exists($this->__controller_path . APP['default']['baseController'] . ".php"))
-            require_once($this->__controller_path . APP['default']['baseController'] . ".php");
+        if (file_exists($this->__controller_path . $_ENV['APP']['default']['baseController'] . ".php"))
+            require_once($this->__controller_path . $_ENV['APP']['default']['baseController'] . ".php");
 
         foreach ($__uri_array as $__uri_element) {
             if (!$this->__controller_name)
@@ -61,7 +60,7 @@ class Controller
             __error("Missing Controller");
 
         if (!$this->__method_name)
-            $this->__method_name = APP['default']['method'];
+            $this->__method_name = $_ENV['APP']['default']['method'];
 
         if (!class_exists($this->__controller_name))
             __error("Missing Controller Class: " . ucwords($this->__controller_name));

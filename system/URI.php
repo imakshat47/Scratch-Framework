@@ -18,7 +18,7 @@ class URI
             $__uri =  filter_var(rtrim(preg_replace($config['preg_replace'], '', $___uri), '/'), FILTER_SANITIZE_URL);
             return  explode('/', $__uri);
         } else
-            return [APP['default']['controller']];
+            return [$_ENV['APP']['default']['controller']];
     }
 
     /*
