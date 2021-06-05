@@ -70,7 +70,7 @@ $__constant_var = [
     'UPLOAD_FILE' => '',
     'API' => $app['api'],
     // User Defined: Update in /public/server.php "Setting Constant"
-    'URL' => '',
+    'URL' => $config['BASE_URL'],   
 ];
 
 /*
