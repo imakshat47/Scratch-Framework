@@ -6,6 +6,24 @@
  * SOME NECESSARY VARIABLES:
  */
 require_once "../env.php";
+// Setting $_ENV Environment Variable
+foreach ($__env_var as $__key => $__value)
+    $_ENV[$__key] = empty($__value) ? $config[$__key] : $__value;
+
+// Setting Constant
+/* User Defined */
+define("URL", empty($__constant_var['URL']) ? $config['URL'] : $__constant_var['URL']);
+
+/* System Defined */
+define("ENVIRONMENT", empty($__constant_var['ENVIRONMENT']) ? $config['ENVIRONMENT'] : $__constant_var['ENVIRONMENT']);
+define("HTTP_ASSET_PATH", empty($__constant_var['HTTP_ASSET_PATH']) ? $config['HTTP_ASSET_PATH'] : $__constant_var['HTTP_ASSET_PATH']);
+define("HTTP_IMAGES", empty($__constant_var['HTTP_IMAGES']) ? $config['HTTP_IMAGES'] : $__constant_var['HTTP_IMAGES']);
+define("UPLOAD_FILE", empty($__constant_var['UPLOAD_FILE']) ? $config['UPLOAD_FILE'] : $__constant_var['UPLOAD_FILE']);
+define("API", empty($__constant_var['API']) ? $config['API'] : $__constant_var['API']);
+// User Defined
+foreach ($__constant_var as $__key => $__value)
+    if (!defined($__key))
+        define($__key, empty($__value) ? $config[$__key] : $__value);
 
 /*
 *---------------------------------------------------------------

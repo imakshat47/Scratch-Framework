@@ -34,6 +34,12 @@ class URI
         return $_SERVER;
     }
 
+    /** GET REQUEST METHOD */
+    function request_method($_type = 'POST')
+    {
+        return ($this->server('REQUEST_METHOD') === $_type) ? true : false;
+    }
+
     /*
     *   RETURNS POST VALUES FOR KEYS
     */

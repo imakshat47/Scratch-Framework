@@ -62,12 +62,15 @@ $__env_var = [
 */
 
 $__constant_var = [
-    'ENVIRONMENT' => '',
+    // System Defined
+    'ENVIRONMENT' => 'development',
     'ROOT_DIR' => '',
     'HTTP_ASSET_PATH' => '',
     'HTTP_IMAGES' => '',
     'UPLOAD_FILE' => '',
     'API' => $app['api'],
+    // User Defined: Update in /public/server.php "Setting Constant"
+    'URL' => '',
 ];
 
 /*
@@ -75,9 +78,3 @@ $__constant_var = [
     // END OF USER CONFIGURABLE SETTINGS.  DO NOT EDIT BELOW THIS LINE
     // --------------------------------------------------------------------
 */
-
-foreach ($__env_var as $__key => $__value)
-    $_ENV[$__key] = empty($__value) ? $config[$__key] : $__value;
-
-foreach ($__constant_var as $__key => $__value)
-    define($__key, empty($__value) ? $config[$__key] : $__value);

@@ -93,8 +93,7 @@ class Session
                 if ($this->__is_valid($__sesssion__name))
                     $$__sesssion__name[$__keys] = $__values;
                 else {
-                    trigger_error("Session $__sesssion__name alreay set!!", E_USER_WARNING);
-                    exit(5);
+                    __error("Session $__sesssion__name alreay set!!", true);
                 }
             }
             $this->__set_session($__sesssion__name, $$__sesssion__name);
@@ -108,7 +107,7 @@ class Session
         if ($__key)
             return $this->__get_session($__key);
         else
-            trigger_error("Session $__key missing!", E_USER_WARNING);
+            __error("Session $__key missing!", E_USER_WARNING);
     }
 
     /** UNSET SESSION BY KEY */
@@ -139,6 +138,6 @@ class Session
     {
         if ($__key)
             return $this->__get_session($__key);
-        else trigger_error("Session $__key missing!", E_USER_WARNING);
+        else __error("Session $__key missing!", E_USER_WARNING);
     }
 }

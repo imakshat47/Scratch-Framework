@@ -67,16 +67,16 @@ class Database
             $this->__conn =  new PDO($__db_dns, $__db_user, $__db_pass, $this->__attribute);
             return true;
         } catch (PDOException $__err) {
-            trigger_error("Exception: " . $__err->getMessage(), E_USER_ERROR);
+            __error($__err->getMessage(), $__err);
         }
     }
 
     function __destruct()
     {
         $this->__message = '';
-        $__prepared = null;
-        $__where__condition = null;
-        $this->__set_data = null;
+        $__prepared = Null;
+        $__where__condition = Null;
+        $this->__set_data = Null;
     }
 
     /**
@@ -97,6 +97,8 @@ class Database
      */
     public function select($__select__data = "*")
     {
+        if (is_array($__select__data))
+            $__select__data = implode(' , ', $__select__data);
         $this->__message = "SELECT $__select__data ";
         return $this;
     }
@@ -109,7 +111,7 @@ class Database
      */
     public function from($__table)
     {
-        $this->__message .= " FROM " . $__table;
+        $this->__message .= " FROM $__table ";
         return $this;
     }
 
@@ -121,19 +123,19 @@ class Database
      */
     public function where($__where__condition = null, $__value = false)
     {
+        if ($__where__condition == null)
+            return $this;
         $__where__command = "";
         if (is_array($__where__condition)) {
             foreach (array_keys($__where__condition) as $__key) {
-                $__where__command .= $__where__command != '' ? " AND $__key = :$__key " : " $__key = :$__key ";
+                $__where__command .= $__where__command != '' ? " AND `$__key` = :$__key " : " `$__key` = :$__key ";
             }
             $this->__where_condition = $__where__condition;
         } elseif ($__where__command && $__value) {
             $__where__command = ":$__where__condition = ':$__where__command'";
             $this->__where_condition = $__value;
         } else $__where__command = "1=1";
-
         $this->__message .= " WHERE $__where__command ";
-
         return $this;
     }
 
@@ -147,6 +149,22 @@ class Database
     public function limit($__limit, $__offset)
     {
         $this->__message .= " LIMIT $__limit OFFSET $__offset";
+        return $this;
+    }
+
+
+    /**
+     *
+     * @param Array $__group_by     
+     * @param String $__group
+     * @return OBJECT INSTANCE
+     *
+     */
+    public function group_by($__group_by)
+    {
+        if (is_array($__group_by))
+            $__group_by = implode(',', $__group_by);
+        $this->__message .= " GROUP BY $__group_by ";
         return $this;
     }
 
@@ -175,14 +193,13 @@ class Database
      */
     public function get()
     {
-        $this->__prepared = $this->prepare_query();
         try {
+            $this->__prepared = $this->prepare_query();
             if ($this->__where_condition)
                 $this->__prepared->execute($this->__where_condition);
             else $this->__prepared->execute();
         } catch (PDOException $__err) {
-            trigger_error("Exception: " . $__err->getMessage(), E_USER_ERROR);
-            return false;
+            return __error($__err->getMessage(), $__err);
         }
         return $this;
     }
@@ -222,20 +239,29 @@ class Database
     }
 
 
-    /**
-     *
-     * @param SET DATA FOR UPDATE QUERY
-     * @return OBJECT INSTANCE
-     *
+    /** Set: Set Variables for Update Query    
+     * @param Array / String $__set
+     * @param String $__value
+     * @return OBJECT $this
      */
-    public function set($__set)
+    public function set($__set, $__value = null)
     {
-        $__set_command = '';
-        foreach (array_keys($__set) as $__key)
-            $__set_command .= ($__set_command == "") ? ("`$__key` = :$__key") : (", `$__key` = :$__key");
-        $this->__message = "SET $__set_command";
-        $this->__set_data = $__set;
+        if ($__value == null) {
+            $__set_command = " ";
+            foreach (array_keys($__set) as $__key)
+                $__set_command .= ($__set_command != " ") ? ", `$__key` = :$__key " : " `$__key` = :$__key ";
+            $this->__set_data = $__set;
+            $this->__message = "SET $__set_command";
+        } else {
+            $this->__set_data = $__value;
+            $this->__message = "SET `$__set` = :$__value";
+        }
         return $this;
+    }
+
+    public function count()
+    {
+        return $this->__prepared->rowCount();
     }
 
     /**
@@ -249,7 +275,7 @@ class Database
         $this->where($__where__condition);
         $this->__where_condition = $__where__condition;
         if ($this->get())
-            return true;
+            return $this->count();
         return false;
     }
 
@@ -261,24 +287,20 @@ class Database
      */
     public function update($__table)
     {
-        $this->__message = "UPDATE $__table $this->__message";
-
-        $this->__prepared = $this->prepare_query();
-
-        if ($this->__set_data)
-            foreach ($this->__set_data as $__key => $__value)
-                $this->__prepared->bindValue(":$__key", $__value);
-        if ($this->__where_condition)
-            foreach ($this->__where_condition as $__key => $__value)
-                $this->__prepared->bindValue(":$__key", $__value);
-
+        $this->__message = "UPDATE $__table $this->__message;";
         try {
+            $this->__prepared = $this->prepare_query();
+            if ($this->__set_data)
+                foreach ($this->__set_data as $__key => $__value)
+                    $this->__prepared->bindValue(":$__key", $__value);
+            if ($this->__where_condition)
+                foreach ($this->__where_condition as $__key => $__value)
+                    $this->__prepared->bindValue(":$__key", $__value);
             $this->__prepared->execute();
         } catch (Exception $__err) {
-            trigger_error("Exception: " . $__err->getMessage(), E_USER_ERROR);
-            return false;
+            return __error($__err->getMessage(), $__err);
         }
-        return true;
+        return $this->__prepared->rowCount();
     }
 
     /**
@@ -291,23 +313,23 @@ class Database
     {
         $this->__message = "INSERT INTO `$__table` (";
 
-        if (is_array($__insert__data)) {
-            $this->__message .= implode(",", array_keys($__insert__data));
-            $this->__message .= ") VALUES (:";
-            $this->__message .= implode(", :",  array_keys($__insert__data));
-            $this->__message .= ");";
-        }
-
-        $this->__prepared = $this->prepare_query();
-
-        foreach ($__insert__data as $__key => $__value)
-            $this->__prepared->bindValue(":$__key", $__value);
-
         try {
+
+            if (is_array($__insert__data)) {
+                $this->__message .= implode(",", array_keys($__insert__data));
+                $this->__message .= ") VALUES (:";
+                $this->__message .= implode(", :",  array_keys($__insert__data));
+                $this->__message .= ");";
+            }
+
+            $this->__prepared = $this->prepare_query();
+
+            foreach ($__insert__data as $__key => $__value)
+                $this->__prepared->bindValue(":$__key", $__value);
+
             $this->__prepared->execute();
         } catch (Exception $__err) {
-            trigger_error("Exception: " . $__err->getMessage(), E_USER_ERROR);
-            return false;
+            return __error($__err->getMessage(), $__err);
         }
         return true;
     }

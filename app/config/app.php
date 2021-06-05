@@ -12,7 +12,7 @@
     // --------------------------------------------------------------------
 */
 
-$app = [   
+$app = [
     /** APP Varaibles for Setup for Views */
     'app' => [
         'theme_color' => '#4caf50',
@@ -27,14 +27,18 @@ $app = [
             "title" => "Scratch",
             "type" => "website",
             "url" => "",
-            "name" => "Scratch",
-            "description" => "A flexible and highly scalable php Framework, Scratch. Build beautiful websites and powerful Applications!!",
-            "keywords" => "Scratch, PHP Framework, Website Pramework",
+            "name" => "Scratch Website",
+            "description" => "Scratch: MVC Farmework",
+            "keywords" => "scratch,mvc framework",
         ],
 
-        'css' => [],
+        'css' => [
+            
+        ],
 
-        'js' => [],
+        'js' => [
+            
+        ],
     ],
 
     /** DEFINE API VARIABLES */

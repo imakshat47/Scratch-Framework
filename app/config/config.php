@@ -45,11 +45,10 @@ $config = [
     'ENVIRONMENT' => 'development',
 
 
-
     /** DEFINE APP VARIABLES */
     'APP' => [
         // Name of Application
-        'name' => 'Scratch',
+        // 'name' => 'Scratch',                Update App Name HERE!!
         // Fallback url - Redirects to another url if any error
         'fallback_url' => '',
         // directory for different MVC components
@@ -66,7 +65,7 @@ $config = [
             'baseController' => 'BaseController',
             'baseModel' => 'Base_Model',
         ],
-        // 404 erro view
+        // 404 error view
         'error' => '_404',
         // Loader intances
         'loader' => [
@@ -109,11 +108,10 @@ $config = [
     ],
 
 
-
     /** SET GET_TIME METHOD: 
      * TIMEZONE 
      * FORMAT     
-    */
+     */
     'TIME' => [
         'time_zone' => 'Asia/Kolkata',
         'time_format' => 'Y-m-d H:i:s',
@@ -128,7 +126,12 @@ $config = [
      * 'jpeg',
      * 'jpg'
      * */
-    'FILE_EXTNS' => []
+    'FILE_EXTNS' => [
+        'css',
+        'js',
+        'jpg',
+        'png',
+    ]
 ];
 
 /*
